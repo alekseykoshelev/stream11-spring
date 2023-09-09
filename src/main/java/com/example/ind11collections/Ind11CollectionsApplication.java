@@ -1,32 +1,22 @@
 package com.example.ind11collections;
 
+import com.example.ind11collections.model.Employee;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @SpringBootApplication
 public class Ind11CollectionsApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(Ind11CollectionsApplication.class, args);
+        // javafx
+        // swing
 
-
-        /*
-                            8
-                        6       10
-                      4
-                    3
-                  2
-                1
-              0
-           -1
-
-
-                        3
-                      2   4
-         */
-
-
-
+        ArrayList<String> a;
+        a.equals()
     }
 
 }

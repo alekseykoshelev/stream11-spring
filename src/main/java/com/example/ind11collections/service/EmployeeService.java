@@ -6,7 +6,11 @@ import com.example.ind11collections.exceptions.EmployeeStorageIsFullException;
 import com.example.ind11collections.model.Employee;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+
+import static org.apache.commons.lang3.StringUtils.capitalize;
 
 @Service
 public class EmployeeService {
@@ -25,7 +29,7 @@ public class EmployeeService {
             throw new EmployeeAlreadyAddedException();
         }
 
-        employees.put(key, new Employee(firstName, lastName));
+        employees.put(key, new Employee(capitalize(firstName), capitalize(lastName)));
     }
 
     public Employee findEmployee(String firstName, String lastName) {

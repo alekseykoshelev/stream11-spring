@@ -1,7 +1,9 @@
 package com.example.ind11collections.controller;
 
+import com.example.ind11collections.exceptions.NotValidArgumentException;
 import com.example.ind11collections.model.Employee;
 import com.example.ind11collections.service.EmployeeService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,21 +23,32 @@ public class EmployeeController {
 
     @GetMapping("/add")
     public void add(@RequestParam String firstName, @RequestParam String lastName) {
+        check(firstName, lastName);
         service.addEmployee(firstName, lastName);
     }
 
     @GetMapping("/get")
     public Employee get(@RequestParam String firstName, @RequestParam String lastName) {
+        check(firstName, lastName);
         return service.findEmployee(firstName, lastName);
     }
 
     @GetMapping("/remove")
     public boolean remove(@RequestParam String firstName, @RequestParam String lastName) {
+        check(firstName, lastName);
         return service.removeEmployee(firstName, lastName);
     }
 
     @GetMapping("/all")
     public Collection<Employee> getAll() {
         return service.getAll();
+    }
+
+    private void check(String... args) {
+        for (String arg : args) {
+            if (!StringUtils.isAlpha(arg)) {
+                throw new NotValidArgumentException();
+            }
+        }
     }
 }

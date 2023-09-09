@@ -17,6 +17,14 @@ public class DepartmentService {
         this.employeeService = employeeService;
     }
 
+    public double sum(int deptId){
+        return employeeService.getAll()
+                .stream()
+                .filter(e -> e.getDepartment() == deptId)
+                .mapToDouble(Employee::getSalary)
+                .sum();
+    }
+
     public double maxSalary(int deptId) {
         return employeeService.getAll()
                 .stream()
@@ -27,18 +35,6 @@ public class DepartmentService {
     }
 
     public double minSalary(int deptId) {
-
-        // lifehack
-        employeeService.getAll()
-                .stream()
-                .map(new Function<Employee, Double>() {
-                    @Override
-                    public Double apply(Employee employee) {
-                        return employee.getSalary();
-                    }
-                });
-
-
         return employeeService.getAll()
                 .stream()
                 .filter(e -> e.getDepartment() == deptId)

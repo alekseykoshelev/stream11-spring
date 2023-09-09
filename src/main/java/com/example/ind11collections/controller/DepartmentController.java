@@ -2,10 +2,7 @@ package com.example.ind11collections.controller;
 
 import com.example.ind11collections.model.Employee;
 import com.example.ind11collections.service.DepartmentService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 import java.util.List;
@@ -21,22 +18,27 @@ public class DepartmentController {
         this.service = service;
     }
 
-    @GetMapping("/max-salary")
-    public double max(@RequestParam int departmentId) {
-        return service.maxSalary(departmentId);
+    @GetMapping("/{deptId}/salary/sum")
+    public double sumByDept(@PathVariable int deptId) {
+        return service.sum(deptId);
     }
 
-    @GetMapping("/min-salary")
-    public double min(@RequestParam int departmentId) {
-        return service.minSalary(departmentId);
+    @GetMapping("/{deptId}/salary/max")
+    public double max(@PathVariable int deptId) {
+        return service.maxSalary(deptId);
     }
 
-    @GetMapping("/find-by-dept")
-    public Collection<Employee> byDept(@RequestParam int departmentId) {
-        return service.findAllByDept(departmentId);
+    @GetMapping("/{deptId}/salary/min")
+    public double min(@PathVariable int deptId) {
+        return service.minSalary(deptId);
     }
 
-    @GetMapping("/all")
+    @GetMapping("/{deptId}/employees")
+    public Collection<Employee> byDept(@PathVariable int deptId) {
+        return service.findAllByDept(deptId);
+    }
+
+    @GetMapping("/employees")
     public Map<Integer, List<Employee>> all() {
         return service.groupByDept();
     }

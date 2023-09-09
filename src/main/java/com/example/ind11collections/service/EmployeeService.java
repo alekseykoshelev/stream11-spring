@@ -19,7 +19,7 @@ public class EmployeeService {
 
     private final Map<String, Employee> employees = new HashMap<>();
 
-    public void addEmployee(String firstName, String lastName) {
+    public void addEmployee(String firstName, String lastName, double salary, int departmentId) {
         if (employees.size() == SIZE) {
             throw new EmployeeStorageIsFullException();
         }
@@ -29,7 +29,7 @@ public class EmployeeService {
             throw new EmployeeAlreadyAddedException();
         }
 
-        employees.put(key, new Employee(capitalize(firstName), capitalize(lastName)));
+        employees.put(key, new Employee(capitalize(firstName), capitalize(lastName), salary, departmentId));
     }
 
     public Employee findEmployee(String firstName, String lastName) {
